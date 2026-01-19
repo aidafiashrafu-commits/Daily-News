@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily News Admin Dashboard">
+    <title>Daily News - Admin Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/admin-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-newspaper"></i>
+                <span>Daily News</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#dashboard" class="nav-link active" data-tab="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#posts" class="nav-link" data-tab="posts">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Posts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#categories" class="nav-link" data-tab="categories">
+                        <i class="fas fa-folder"></i>
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#comments" class="nav-link" data-tab="comments">
+                        <i class="fas fa-comments"></i>
+                        <span>Comments</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#users" class="nav-link" data-tab="users">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings" class="nav-link" data-tab="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#" class="nav-link logout" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <div class="admin-topbar">
+            <div class="topbar-search">
+                <input type="text" id="searchInput" placeholder="Search posts, users, comments...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="topbar-right">
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="Admin">
+                    <div class="user-info">
+                        <p class="user-name">Admin User</p>
+                        <p class="user-role">Administrator</p>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div class="admin-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-content" id="dashboard-tab">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Welcome back to your admin panel</p>
+                </div>
+
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Posts</h3>
+                            <p class="stat-number">24</p>
+                            <small>+2 this month</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Views</h3>
+                            <p class="stat-number">1.2K</p>
+                            <small>+150 today</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Comments</h3>
+                            <p class="stat-number">87</p>
+                            <small>+12 pending</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon bg-purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Subscribers</h3>
+                            <p class="stat-number">456</p>
+                            <small>+18 this week</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="chart-container">
+                        <h3>Monthly Views</h3>
+                        <canvas id="viewsChart"></canvas>
+                    </div>
+
+                    <div class="recent-posts">
+                        <div class="section-header">
+                            <h3>Recent Posts</h3>
+                            <a href="#posts" class="view-all">View All →</a>
+                        </div>
+                        <div class="posts-list">
+                            <div class="post-item">
+                                <div class="post-title">Breaking News: Technology Update</div>
+                                <div class="post-meta">
+                                    <span class="badge badge-published">Published</span>
+                                    <span class="post-date">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="post-item">
+                                <div class="post-title">Latest Business Trends 2026</div>
+                                <div class="post-meta">
+                                    <span class="badge badge-draft">Draft</span>
+                                    <span class="post-date">5 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="post-item">
+                                <div class="post-title">World News Roundup</div>
+                                <div class="post-meta">
+                                    <span class="badge badge-published">Published</span>
+                                    <span class="post-date">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Posts Tab -->
+            <div class="tab-content hidden" id="posts-tab">
+                <div class="page-header">
+                    <div>
+                        <h1>Posts</h1>
+                        <p>Manage all your news articles</p>
+                    </div>
+                    <button class="btn btn-primary" id="newPostBtn">
+                        <i class="fas fa-plus"></i> New Post
+                    </button>
+                </div>
+
+                <div class="posts-table-container">
+                    <table class="posts-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Views</th>
+                                <th>Comments</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody">
+                            <tr>
+                                <td><strong>Breaking News: Technology Update</strong></td>
+                                <td>Technology</td>
+                                <td><span class="badge badge-published">Published</span></td>
+                                <td>324</td>
+                                <td>12</td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <button class="btn-icon" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon danger" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Latest Business Trends 2026</strong></td>
+                                <td>Business</td>
+                                <td><span class="badge badge-draft">Draft</span></td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>5 hours ago</td>
+                                <td>
+                                    <button class="btn-icon" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon danger" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>World News Roundup</strong></td>
+                                <td>World News</td>
+                                <td><span class="badge badge-published">Published</span></td>
+                                <td>456</td>
+                                <td>28</td>
+                                <td>1 day ago</td>
+                                <td>
+                                    <button class="btn-icon" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon danger" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Categories Tab -->
+            <div class="tab-content hidden" id="categories-tab">
+                <div class="page-header">
+                    <div>
+                        <h1>Categories</h1>
+                        <p>Manage post categories</p>
+                    </div>
+                    <button class="btn btn-primary" id="newCategoryBtn">
+                        <i class="fas fa-plus"></i> New Category
+                    </button>
+                </div>
+
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon"><i class="fas fa-newspaper"></i></div>
+                        <h3>Technology</h3>
+                        <p>15 posts</p>
+                        <div class="card-actions">
+                            <button class="btn-small">Edit</button>
+                            <button class="btn-small danger">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon"><i class="fas fa-briefcase"></i></div>
+                        <h3>Business</h3>
+                        <p>8 posts</p>
+                        <div class="card-actions">
+                            <button class="btn-small">Edit</button>
+                            <button class="btn-small danger">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon"><i class="fas fa-globe"></i></div>
+                        <h3>World News</h3>
+                        <p>12 posts</p>
+                        <div class="card-actions">
+                            <button class="btn-small">Edit</button>
+                            <button class="btn-small danger">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon"><i class="fas fa-heartbeat"></i></div>
+                        <h3>Health</h3>
+                        <p>6 posts</p>
+                        <div class="card-actions">
+                            <button class="btn-small">Edit</button>
+                            <button class="btn-small danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments Tab -->
+            <div class="tab-content hidden" id="comments-tab">
+                <div class="page-header">
+                    <h1>Comments</h1>
+                    <p>Moderate user comments</p>
+                </div>
+
+                <div class="comments-list">
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <strong>John Doe</strong>
+                            <span class="comment-date">2 hours ago</span>
+                            <span class="badge badge-pending">Pending</span>
+                        </div>
+                        <p class="comment-text">Great article! Very informative and well-written.</p>
+                        <div class="comment-actions">
+                            <button class="btn-small">Approve</button>
+                            <button class="btn-small danger">Reject</button>
+                            <button class="btn-small">Reply</button>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <strong>Jane Smith</strong>
+                            <span class="comment-date">5 hours ago</span>
+                            <span class="badge badge-approved">Approved</span>
+                        </div>
+                        <p class="comment-text">Thanks for the update! Looking forward to more news.</p>
+                        <div class="comment-actions">
+                            <button class="btn-small">Reply</button>
+                            <button class="btn-small danger">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <strong>Mike Johnson</strong>
+                            <span class="comment-date">1 day ago</span>
+                            <span class="badge badge-approved">Approved</span>
+                        </div>
+                        <p class="comment-text">Keep up the good work with quality news coverage.</p>
+                        <div class="comment-actions">
+                            <button class="btn-small">Reply</button>
+                            <button class="btn-small danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="tab-content hidden" id="users-tab">
+                <div class="page-header">
+                    <div>
+                        <h1>Users</h1>
+                        <p>Manage admin users</p>
+                    </div>
+                    <button class="btn btn-primary" id="newUserBtn">
+                        <i class="fas fa-plus"></i> New User
+                    </button>
+                </div>
+
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Admin User</strong></td>
+                                <td>admin@dailynews.com</td>
+                                <td><span class="badge badge-admin">Administrator</span></td>
+                                <td><span class="status-active">Active</span></td>
+                                <td>Jan 1, 2026</td>
+                                <td>
+                                    <button class="btn-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Editor One</strong></td>
+                                <td>editor1@dailynews.com</td>
+                                <td><span class="badge badge-editor">Editor</span></td>
+                                <td><span class="status-active">Active</span></td>
+                                <td>Jan 5, 2026</td>
+                                <td>
+                                    <button class="btn-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content hidden" id="settings-tab">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                    <p>Manage your website settings</p>
+                </div>
+
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3>Site Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Site Title</label>
+                                <input type="text" value="Daily News" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Site Description</label>
+                                <textarea class="form-control" rows="4">Your trusted source for breaking news and latest updates</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Posts Per Page</label>
+                                <input type="number" value="10" class="form-control">
+                            </div>
+
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="commentsEnabled" checked>
+                                <label for="commentsEnabled">Enable comments</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Account Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" placeholder="Enter current password" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" placeholder="Enter new password" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" placeholder="Confirm new password" class="form-control">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for New Post -->
+    <div class="modal" id="newPostModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Post</h2>
+                <button class="modal-close" id="closePostModal">×</button>
+            </div>
+            <form class="post-form" id="postForm">
+                <div class="form-group">
+                    <label>Post Title</label>
+                    <input type="text" placeholder="Enter post title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select required>
+                        <option>Select Category</option>
+                        <option>Technology</option>
+                        <option>Business</option>
+                        <option>World News</option>
+                        <option>Health</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Featured Image</label>
+                    <input type="file" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea placeholder="Write your post content here..." rows="10" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Post Status</label>
+                    <select required>
+                        <option>Draft</option>
+                        <option>Published</option>
+                        <option>Scheduled</option>
+                    </select>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelPostBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/admin-script.js"></script>
+</body>
+</html>

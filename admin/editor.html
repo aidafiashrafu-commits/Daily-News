@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily News Admin - Post Editor">
+    <title>Daily News - Post Editor</title>
+    <link rel="stylesheet" href="../assets/css/admin-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-newspaper"></i>
+                <span>Daily News</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.html" class="nav-link active" data-tab="posts">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Posts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.html" class="nav-link" data-tab="categories">
+                        <i class="fas fa-folder"></i>
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#" class="nav-link logout" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <div class="admin-topbar">
+            <div class="topbar-search">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="topbar-right">
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="Admin">
+                    <div class="user-info">
+                        <p class="user-name">Admin User</p>
+                        <p class="user-role">Editor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post Editor Content -->
+        <div class="admin-content">
+            <div class="page-header">
+                <div>
+                    <h1>Create New Post</h1>
+                    <p>Write and publish your news article</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-secondary" id="saveDraftBtn">
+                        <i class="fas fa-save"></i> Save Draft
+                    </button>
+                    <button class="btn btn-primary" id="publishBtn">
+                        <i class="fas fa-paper-plane"></i> Publish
+                    </button>
+                </div>
+            </div>
+
+            <div class="post-editor-container">
+                <form id="postEditorForm">
+                    <!-- Main Editor -->
+                    <div class="editor-main">
+                        <!-- Post Title -->
+                        <div class="form-group">
+                            <input 
+                                type="text" 
+                                id="postTitle" 
+                                class="form-control title-input"
+                                placeholder="Enter post title..."
+                                required
+                            >
+                        </div>
+
+                        <!-- Editor Toolbar -->
+                        <div class="editor-toolbar">
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" title="Bold" data-format="bold">
+                                    <i class="fas fa-bold"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" title="Italic" data-format="italic">
+                                    <i class="fas fa-italic"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" title="Underline" data-format="underline">
+                                    <i class="fas fa-underline"></i>
+                                </button>
+                            </div>
+
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" title="Heading" data-format="heading">
+                                    <i class="fas fa-heading"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" title="Bullet List" data-format="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" title="Quote" data-format="quote">
+                                    <i class="fas fa-quote-left"></i>
+                                </button>
+                            </div>
+
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" title="Add Image" id="insertImageBtn">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" title="Add Link" data-format="link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" title="Code" data-format="code">
+                                    <i class="fas fa-code"></i>
+                                </button>
+                            </div>
+
+                            <div class="toolbar-group">
+                                <button type="button" class="toolbar-btn" title="Undo" data-format="undo">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" title="Redo" data-format="redo">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Content Editor -->
+                        <div class="form-group">
+                            <div 
+                                id="postContent" 
+                                class="content-editor"
+                                contenteditable="true"
+                                placeholder="Write your post content here. You can format text using the toolbar above..."
+                            ></div>
+                        </div>
+
+                        <!-- Preview Mode Toggle -->
+                        <div class="editor-preview-tabs">
+                            <button type="button" class="preview-tab active" data-tab="edit">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button type="button" class="preview-tab" data-tab="preview">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                        </div>
+
+                        <div id="preview" class="hidden" style="padding: 20px; background: white; border-radius: 8px; margin-top: 20px;"></div>
+                    </div>
+
+                    <!-- Sidebar Settings -->
+                    <div class="editor-sidebar">
+                        <!-- Featured Image -->
+                        <div class="sidebar-section">
+                            <h3>Featured Image</h3>
+                            <div class="image-upload">
+                                <input type="file" id="featuredImage" accept="image/*" style="display: none;">
+                                <button type="button" id="uploadImageBtn" class="btn btn-secondary" style="width: 100%;">
+                                    <i class="fas fa-cloud-upload-alt"></i> Upload Image
+                                </button>
+                                <div id="imagePreview" class="image-preview"></div>
+                            </div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="sidebar-section">
+                            <h3>Category</h3>
+                            <select id="postCategory" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="technology">Technology</option>
+                                <option value="business">Business</option>
+                                <option value="world-news">World News</option>
+                                <option value="health">Health</option>
+                                <option value="sports">Sports</option>
+                                <option value="entertainment">Entertainment</option>
+                            </select>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="sidebar-section">
+                            <h3>Tags</h3>
+                            <div class="tags-input">
+                                <input 
+                                    type="text" 
+                                    id="tagsInput" 
+                                    class="form-control"
+                                    placeholder="Add tags (comma separated)"
+                                >
+                                <div id="tagsList" class="tags-list"></div>
+                            </div>
+                        </div>
+
+                        <!-- Publication Settings -->
+                        <div class="sidebar-section">
+                            <h3>Publication</h3>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="postStatus" class="form-control">
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                    <option value="scheduled">Scheduled</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Publish Date</label>
+                                <input type="datetime-local" id="publishDate" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- SEO Settings -->
+                        <div class="sidebar-section">
+                            <h3>SEO</h3>
+                            <div class="form-group">
+                                <label>Meta Description</label>
+                                <textarea 
+                                    id="metaDescription" 
+                                    class="form-control"
+                                    rows="3"
+                                    placeholder="Enter meta description (150 characters max)"
+                                    maxlength="160"
+                                ></textarea>
+                                <small id="charCount">0/160</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Meta Keywords</label>
+                                <input 
+                                    type="text" 
+                                    id="metaKeywords" 
+                                    class="form-control"
+                                    placeholder="Separate keywords with commas"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Post Settings -->
+                        <div class="sidebar-section">
+                            <h3>Settings</h3>
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="enableComments" checked>
+                                <label for="enableComments">Allow comments</label>
+                            </div>
+
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="enableSharing" checked>
+                                <label for="enableSharing">Show share buttons</label>
+                            </div>
+
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="featured">
+                                <label for="featured">Feature this post</label>
+                            </div>
+                        </div>
+
+                        <!-- Word Count -->
+                        <div class="sidebar-section">
+                            <h3>Statistics</h3>
+                            <div class="stat-item">
+                                <span>Words:</span>
+                                <strong id="wordCount">0</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Characters:</span>
+                                <strong id="charCountTotal">0</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Read Time:</span>
+                                <strong id="readTime">0 min</strong>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Hidden file input for image upload -->
+    <input type="file" id="hiddenFileInput" accept="image/*" style="display: none;">
+
+    <script src="../assets/js/admin-script.js"></script>
+    <script src="../assets/js/editor.js"></script>
+</body>
+</html>
